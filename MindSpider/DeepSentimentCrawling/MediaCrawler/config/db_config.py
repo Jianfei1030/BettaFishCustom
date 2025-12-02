@@ -12,11 +12,19 @@
 import os
 
 # mysql config - 使用MindSpider的数据库配置
-MYSQL_DB_PWD = "bettafish"
-MYSQL_DB_USER = "bettafish"
-MYSQL_DB_HOST = "127.0.0.1"
-MYSQL_DB_PORT = 5444
-MYSQL_DB_NAME = "bettafish"
+# 以下为修改后的代码，支持从环境变量读取MindSpider配置：
+MYSQL_DB_PWD = os.getenv("DB_PASSWORD", "bettafish")  # 环境变量优先，原值："bettafish"
+MYSQL_DB_USER = os.getenv("DB_USER", "bettafish")     # 环境变量优先，原值："bettafish"
+MYSQL_DB_HOST = os.getenv("DB_HOST", "127.0.0.1")     # 环境变量优先，原值："127.0.0.1"
+MYSQL_DB_PORT = int(os.getenv("DB_PORT", "5444"))     # 环境变量优先，原值：5444
+MYSQL_DB_NAME = os.getenv("DB_NAME", "bettafish")     # 环境变量优先，原值："bettafish"
+
+# 原有代码（已注释，仅供参考）:
+# MYSQL_DB_PWD = "bettafish"
+# MYSQL_DB_USER = "bettafish"
+# MYSQL_DB_HOST = "127.0.0.1"
+# MYSQL_DB_PORT = 5444
+# MYSQL_DB_NAME = "bettafish"
 
 mysql_db_config = {
     "user": MYSQL_DB_USER,
@@ -58,4 +66,3 @@ postgresql_db_config = {
     "port": POSTGRESQL_DB_PORT,
     "db_name": POSTGRESQL_DB_NAME,
 }
-
